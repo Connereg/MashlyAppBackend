@@ -6,6 +6,11 @@ class UserSubmissionsController < ApplicationController
         render json: UserSubmission.all, status: :ok
     end
 
+    def my_submissions   
+        user_submits = @current_user.user_submissions
+        render json: user_submits, status: :ok
+    end
+
     private
 
     def user_params

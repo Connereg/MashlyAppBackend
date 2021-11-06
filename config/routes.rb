@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get "/me", to: "users#show"
   #to log the user out 
   delete "/logout", to: "sessions#destroy"
+
+  get "/my_submissions", to: "user_submissions#my_submissions"
   
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
