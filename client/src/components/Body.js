@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import { useEffect, useState } from "react";
 import UserProfile from "./UserProfile";
 import Homepage from "./Homepage";
+import SubmitNewMashup from "./SubmitNewMashup";
 
 
 
@@ -25,6 +26,9 @@ function Body(props) {
                         renderToggle={renderToggle}
                         setRenderToggle={setRenderToggle}
 					/>
+				</Route>
+				<Route exact path="/submit_new_mashup">
+					<SubmitNewMashup />
 				</Route>
 			</Switch>      
 		</div>

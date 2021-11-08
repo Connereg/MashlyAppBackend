@@ -31,13 +31,13 @@ function NavBar({ retrieveLoggedInStatus, setLoggedInStatus, loggedInStatus, set
                 ) : null}
 
 				{loggedInStatus ? (
-					<Link to="/new_transaction">
+					<Link to="/submit_new_mashup">
 						<Menu.Item
-							name="new_transaction"
+							name="new_mashup"
 							// active={activeItem === "new_note"}
 							// onClick={handleItemClick}
 						>
-							New Transaction
+							Submit New Mashup
 						</Menu.Item>
 					</Link>
 				) : null}

@@ -6,10 +6,15 @@ class MashupsController < ApplicationController
         render json: Mashup.all, status: :ok
     end
 
+    def create
+        new_mashup = Mashup.create!(mashup_params)
+        render json: new_mashup, status: :ok
+    end
+
     private
 
-    def user_params
-        params.permit()
+    def mashup_params
+        params.permit(:youtubeurl1, :youtubeurl2)
     end
 
     def unprocessable_entity_response(invalid)
