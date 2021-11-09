@@ -1,5 +1,5 @@
 class MashupsController < ApplicationController
-    skip_before_action :authorize, only: [:index, :show]  
+    skip_before_action :authorize, only: [:index, :show, :profile_mashups]  
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
     def index
@@ -26,7 +26,9 @@ class MashupsController < ApplicationController
     end
 
     def profile_mashups
-        
+        owner = User.find(params[:id])
+        profile_mashups_result = Mashup.where(user_id: owner.id)
+        render json: profile_mashups_result, status: :ok
     end
 
     private
@@ -36,6 +38,10 @@ class MashupsController < ApplicationController
     end
 
     def unprocessable_entity_response(invalid)
-        render json: {error: "invalid.record.errors.full_messages"}, status: :unprocessable_entity
+        render json: {errors: invalid.record.errors.full_messages}, status: :unprocessable_entity
+    end
+
+    def render_not_found_response
+        render json: {error: "Mashup Not Found"}, status: :not_found
     end
 end

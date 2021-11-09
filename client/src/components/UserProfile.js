@@ -19,7 +19,7 @@ function UserProfile(props) {
 	// note.user.name.toLowerCase().includes(search.toLowerCase())
 	// ))
     const id = useParams().id;
-    console.log(id)
+    
     // console.log(id)   
     // let history = useHistory();
 
@@ -27,6 +27,8 @@ function UserProfile(props) {
         fetchPageOwner();
         fetchUserSubmissions();
     }, [renderToggle]);
+
+    console.log("This is the Owner", owner.id)
     
     function fetchPageOwner() { 
         fetch(`/users/${id}`, {
@@ -39,17 +41,20 @@ function UserProfile(props) {
     } 
 
     function fetchUserSubmissions() {
-        fetch(`/mashups`, {
+        console.log(owner)
+        fetch(`/profile_mashups/${id}`, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json'},
             credentials: 'include', // INCLUDE THIS IN EVERY REQUEST THAT NEEDS AUTH
         })
         .then((r) => r.json())
         .then((submissionData) => 
-        setMySubmissions(submissionData.map((submit) => (submit))))
+        setMySubmissions(submissionData))
     }
-    
-    const submissionCards = mySubmissions.map((submit) => (
+   
+    console.log(mySubmissions)
+
+    const submissionCards = (mySubmissions ? mySubmissions.map((submit) => (
         <SubmissionCard
             key={submit.id}
             id={submit.id}
@@ -62,8 +67,9 @@ function UserProfile(props) {
             setRenderToggle={setRenderToggle}
             renderToggle={renderToggle}
         />
-
-         ));
+         )) : null) 
+         
+    
 
 	return (
         <>

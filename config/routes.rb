@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy"
 
   # get "/my_submissions", to: "user_submissions#my_submissions"
-  # get "/user_mashups", to: ""
+  get "/profile_mashups/:id", to: "mashups#profile_mashups"
   
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
