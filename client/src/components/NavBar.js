@@ -3,7 +3,7 @@ import { Menu } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import Login from "./Login";
 
-function NavBar({ retrieveLoggedInStatus, setLoggedInStatus, loggedInStatus, setUser }) {
+function NavBar({ retrieveLoggedInStatus, setLoggedInStatus, loggedInStatus, setUser, user }) {
 	
 
 	return (
@@ -19,7 +19,7 @@ function NavBar({ retrieveLoggedInStatus, setLoggedInStatus, loggedInStatus, set
 					</Menu.Item>
 				</Link>
             {loggedInStatus ? (
-				<Link to="/user_profile">
+				<Link to={`/user_profile/${user.id}`}>
 					<Menu.Item
 						name="user_profile"
 						// active={activeItem === "notes"}

@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <NavBar loggedInStatus={loggedInStatus} setLoggedInStatus={setLoggedInStatus} retrieveLoggedInStatus={retrieveLoggedInStatus} setUser={setUser} />
+      <NavBar loggedInStatus={loggedInStatus} setLoggedInStatus={setLoggedInStatus} retrieveLoggedInStatus={retrieveLoggedInStatus} setUser={setUser} user={user} />
       <Body loggedInStatus={loggedInStatus} user={user}/>
     </div>
   );

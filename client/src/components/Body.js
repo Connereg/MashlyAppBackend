@@ -20,7 +20,7 @@ function Body(props) {
 				<Route exact path="/">
 					<Homepage />
 				</Route>
-				<Route exact path="/user_profile">
+				<Route path='/user_profile/:id'>
 					<UserProfile
                         user={user}
                         renderToggle={renderToggle}
@@ -28,7 +28,7 @@ function Body(props) {
 					/>
 				</Route>
 				<Route exact path="/submit_new_mashup">
-					<SubmitNewMashup />
+					<SubmitNewMashup user={user} />
 				</Route>
 			</Switch>      
 		</div>

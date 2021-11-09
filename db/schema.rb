@@ -10,27 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_03_231811) do
+ActiveRecord::Schema.define(version: 2021_11_09_165021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "comments", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "mashup_id", null: false
+    t.string "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["mashup_id"], name: "index_comments_on_mashup_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
   create_table "mashups", force: :cascade do |t|
     t.string "youtubeurl1"
     t.string "youtubeurl2"
+    t.bigint "user_id", null: false
     t.integer "upvotes"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "user_submissions", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "mashup_id", null: false
+    t.string "title"
     t.string "category"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["mashup_id"], name: "index_user_submissions_on_mashup_id"
-    t.index ["user_id"], name: "index_user_submissions_on_user_id"
+    t.index ["user_id"], name: "index_mashups_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -41,6 +45,7 @@ ActiveRecord::Schema.define(version: 2021_11_03_231811) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "user_submissions", "mashups"
-  add_foreign_key "user_submissions", "users"
+  add_foreign_key "comments", "mashups"
+  add_foreign_key "comments", "users"
+  add_foreign_key "mashups", "users"
 end

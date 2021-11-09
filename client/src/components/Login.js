@@ -10,6 +10,7 @@ function Login(props) {
 	const [open, setOpen] = React.useState(false);
 	const [username, setUserName] = useState("");
 	const [password, setPassword] = useState("");
+	const [profile_picture, setProfile_Picture] = useState("");
 
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [errorsAll, setErrorsAll] = useState([]);
@@ -54,7 +55,7 @@ function Login(props) {
                     "Content-Type": "application/json",
                     'Access-Control-Allow-Credentials': true,
                 },
-                body: JSON.stringify({ username, password }),
+                body: JSON.stringify({ username, password, profile_picture }),
             }).then((r) => {
                     setIsLoading(false);
                     if (r.ok) {
@@ -149,6 +150,15 @@ function Login(props) {
 										setPassword(e.target.value)
 									}
 									placeholder="Password"
+								/>
+							</Form.Field>
+							<Form.Field>
+								<label>Profile Picture</label>
+								<input
+									onChange={(e) =>
+										setProfile_Picture(e.target.value)
+									}
+									placeholder="Profile Picture Url"
 								/>
 							</Form.Field>
 							<Button onClick={handleLogInAttempt} >Log In</Button>

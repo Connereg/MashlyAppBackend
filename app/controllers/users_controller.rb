@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    skip_before_action :authorize, only: [:create, :index]  
+    skip_before_action :authorize, only: [:create, :index, :show]  
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
     
     def create
@@ -13,16 +13,18 @@ class UsersController < ApplicationController
     end
 
     def show
-        render json: @current_user, status: :ok
+        pagwOwner = User.find(params[:id])
+        render json: pagwOwner, status: :ok
     end
 
     private
 
     def user_params
-        params.permit(:username, :password)
+        params.permit(:username, :password, :profile_picture)
     end
 
     def unprocessable_entity_response(invalid)
         render json: {error: "invalid.record.errors.full_messages"}, status: :unprocessable_entity
     end
+
 end

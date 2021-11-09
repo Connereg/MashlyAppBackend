@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  resources :user_submissions
+  resources :comments
   resources :users
   resources :mashups
 
@@ -13,7 +13,8 @@ Rails.application.routes.draw do
   #to log the user out 
   delete "/logout", to: "sessions#destroy"
 
-  get "/my_submissions", to: "user_submissions#my_submissions"
+  # get "/my_submissions", to: "user_submissions#my_submissions"
+  # get "/user_mashups", to: ""
   
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
