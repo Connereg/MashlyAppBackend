@@ -6,13 +6,15 @@ import MashViewer from './MashViewer'
 import SubmissionCard from './SubmissionCard'
 
 function UserProfile(props) {
-	const {user, renderToggle, setRenderToggle} = props;
+	const {user, renderToggle, setRenderToggle, LinkToMashupButton} = props;
     
     const [owner, setOwner] = useState({})
     const [mySubmissions, setMySubmissions] = useState([])
     
     const [cardLink1, setCardLink1] = useState("")
     const [cardLink2, setCardLink2] = useState("")
+
+    const [profileRenderToggle, setProfileRenderToggle] = useState(true)
     
 	// const results = (allNotes.filter ((note) => search === "" ||
 	// note.title.toLowerCase().includes(search.toLowerCase()) || 
@@ -21,12 +23,12 @@ function UserProfile(props) {
     const id = useParams().id;
     
     // console.log(id)   
-    // let history = useHistory();
+    let history = useHistory();
 
     useEffect(() => {
         fetchPageOwner();
         fetchUserSubmissions();
-    }, [renderToggle]);
+    }, [history.location.pathname, profileRenderToggle]);
 
     console.log("This is the Owner", owner.id)
     
@@ -64,26 +66,29 @@ function UserProfile(props) {
             youtubeurl1={submit.youtubeurl1}
             youtubeurl2={submit.youtubeurl2}
             user={user}
-            setRenderToggle={setRenderToggle}
-            renderToggle={renderToggle}
+            profileRenderToggle={profileRenderToggle}
+            setProfileRenderToggle={setProfileRenderToggle}
+            setCardLink2={setCardLink2}
+            setCardLink1={setCardLink1}
         />
-         )) : null) 
+         )) : <h2>"This user does not seem to have any mashups created!"</h2>) 
          
     
 
 	return (
         <>
-		<div>
+		<div key={props.pageId}>
             <Image circular centered size="medium" src={owner.profile_picture} alt="profile_pic" ></Image>
             <h2>{owner.username}</h2>
-            <Button onClick={fetchUserSubmissions} > Fetch Submissions </Button>
+            
             <br/>
             <Card.Group>
                 {submissionCards}
             </Card.Group>
         </div>
         <br/>
-        <MashViewer cardLink1={cardLink1} cardLink2={cardLink2} />
+        <Button onClick={fetchUserSubmissions} > Reset Video </Button>
+        <MashViewer cardLink1={cardLink1} cardLink2={cardLink2} setCardLink1={setCardLink1} setCardLink2={setCardLink2}/>
         </>
 	)
 }

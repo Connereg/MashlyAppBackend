@@ -52,7 +52,8 @@ function SubmitNewMashup(props) {
 
     return(
         <div>
-            <h1>Div Here</h1>
+            <h1>To Submit a new Mashup:</h1>
+            <h4>Fill out the following fields, click 'Supply Video Links' button, review your work and then click the 'Save New Mashup' Button</h4>
             <Modal
                 basic
                 onClose={() => setOpen(false)}

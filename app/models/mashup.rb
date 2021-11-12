@@ -1,5 +1,6 @@
 class Mashup < ApplicationRecord
   belongs_to :user
+  has_many :comments, dependent: :destroy
 
   def initialize(attributes=nil)
     attr_with_defaults = {:upvotes => 0}.merge(attributes)

@@ -5,7 +5,6 @@ import Login from "./Login";
 
 function NavBar({ retrieveLoggedInStatus, setLoggedInStatus, loggedInStatus, setUser, user }) {
 	
-
 	return (
 		<div>
 			<Menu>
@@ -16,6 +15,11 @@ function NavBar({ retrieveLoggedInStatus, setLoggedInStatus, loggedInStatus, set
 						// onClick={handleItemClick}
 					>
 						Homepage
+					</Menu.Item>
+				</Link>
+				<Link to="/search_users">
+					<Menu.Item name="search_users">
+						Search Users
 					</Menu.Item>
 				</Link>
             {loggedInStatus ? (

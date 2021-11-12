@@ -3,21 +3,6 @@ import ReactPlayer from "react-player";
 import { Form, Container } from "semantic-ui-react"
 import { Button, Segment } from "semantic-ui-react"
 import PlayButton from "./PlayButton";
-// import PlayerComponent from "./PlayerComponent";
-
-// break these out into their own files
-// const PlayButton = (props) => {
-//     const { isPlaying, handleClick } = props;
-
-//     return (
-//         <Button
-//             color={isPlaying ? 'red' : 'blue'}
-//             onClick={handleClick}
-//         >
-//             Start/Stop Simulplay
-//         </Button>
-//     );
-// }
 
 const PlayerComponent = (props) => {
     const { simulPlay, supplyLink1, supplyLink2 } = props;
@@ -36,7 +21,7 @@ const PlayerComponent = (props) => {
 
 function MashViewer(props) {
 
-    const { cardLink1, cardLink2, } = props;
+    const { cardLink1, cardLink2, setCardLink1, setCardLink2} = props;
 
     const [simulPlay, setSimulPlay] = useState(false)
 	const [videoLink1, setVideoLink1] = useState("")
@@ -44,11 +29,22 @@ function MashViewer(props) {
 
 	const [supplyLink1, setSupplyLink1] = useState("")
 	const [supplyLink2, setSupplyLink2] = useState("")
+
+    // if (contentAvailableToSupply)
+    //     supplyNewUrls()
 	
     function supplyNewUrls() {
+        if (cardLink1 && cardLink2) {
+        setSupplyLink1(cardLink1)
+        setSupplyLink2(cardLink2)
+        document.getElementById("url-supply-form").reset()
+        setCardLink1("")
+        setCardLink2("")
+        }else{
 		setSupplyLink1(videoLink1)
         setSupplyLink2(videoLink2)
-        
+        document.getElementById("url-supply-form").reset()
+        }
 	}
 
     function playButtonToggle() {
@@ -58,9 +54,9 @@ function MashViewer(props) {
 	return (
         <Container>	
 		    <br />
-            <Form >
-                <input onChange={(e) => setVideoLink1(e.target.value)} placeholder=" Set Youtube Url 1 Here..." type="text" value={videoLink1}></input>
-                <input onChange={(e) => setVideoLink2(e.target.value)} placeholder=" Set Youtube Url 2 Here..." type="text" value={videoLink2}></input>
+            <Form id="url-supply-form">
+                <input onChange={(e) => setVideoLink1(e.target.value)} placeholder=" Set Youtube Url 1 Here..." type="text" value={cardLink1 ? cardLink1 : videoLink1}></input>
+                <input onChange={(e) => setVideoLink2(e.target.value)} placeholder=" Set Youtube Url 2 Here..." type="text" value={cardLink2 ? cardLink2 : videoLink2}></input>
                 <Button.Group attached='top'>
                     <Button type='submit' onClick={supplyNewUrls}>Supply Video Links</Button>
                     <PlayButton

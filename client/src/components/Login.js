@@ -13,8 +13,10 @@ function Login(props) {
 	const [profile_picture, setProfile_Picture] = useState("");
 
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [confirmDeletion, setConfirmDeletion] = useState(false)
     const [errorsAll, setErrorsAll] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+
 
 	function handleLogInAttempt(e) {
         e.preventDefault();
@@ -33,10 +35,13 @@ function Login(props) {
                     r.json().then((user) => {
                         console.log(user);
                         setUser(user)
+						localStorage.setItem("user_id_current", user.id)
                     })
                     setIsLoggedIn(true)
                     retrieveLoggedInStatus(true)
-                    localStorage.setItem("username", username);
+                    localStorage.setItem("username", username)
+					
+					history.push('/')
                     
                 }
                 else {
@@ -78,12 +83,12 @@ function Login(props) {
     
     function handleLogOut() {
         localStorage.removeItem("username");
-        localStorage.removeItem("user_id");
+        localStorage.removeItem("user_id_current");
         localStorage.removeItem("isLoggedIn");
         setLoggedInStatus(false);
         setIsLoggedIn(false);
         setUser({})
-        history.push(`/`)
+        history.push('/')
     }
     
 
@@ -175,6 +180,12 @@ function Login(props) {
 					{isLoggedIn ? (
 						<Button onClick={handleLogOut}> Log Out </Button>
 					) : null}
+					{/* {isLoggedIn ? (
+						<Button onClick={setConfirmDeletion(!confirmDeletion)}> Delete User Profile </Button>
+					): null}
+					{isLoggedIn && confirmDeletion ? (
+						<Button onClick={setConfirmDeletion(!confirmDeletion)}> Are your sure youd like to delete this user?</Button>
+					): null} */}
 				</Modal.Description>
 			</Modal.Content>
 			<Modal.Actions>

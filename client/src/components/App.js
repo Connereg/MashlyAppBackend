@@ -6,6 +6,7 @@ import NavBar from "./NavBar";
 import Body from "./Body";
 
 
+
 function App() {
   const [loggedInStatus, setLoggedInStatus] = useState(false);
   const [user, setUser] = useState({})
@@ -19,7 +20,8 @@ function App() {
     <div className="App">
       <Header />
       <NavBar loggedInStatus={loggedInStatus} setLoggedInStatus={setLoggedInStatus} retrieveLoggedInStatus={retrieveLoggedInStatus} setUser={setUser} user={user} />
-      <Body loggedInStatus={loggedInStatus} user={user}/>
+
+      <Body loggedInStatus={loggedInStatus} user={user} />
     </div>
   );
 }
