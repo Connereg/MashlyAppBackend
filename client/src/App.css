@@ -36,9 +36,3 @@
     transform: rotate(360deg);
   }
 }
-
-.video-container-closed {
-  visibility: hidden;
-  position: absolute;
-  top: -9999px;
-}

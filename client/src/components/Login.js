@@ -68,10 +68,12 @@ function Login(props) {
                         r.json().then((user) => {
                             console.log(user);
                             setUser(user)
+							localStorage.setItem("user_id_current", user.id)
                         })
                         setIsLoggedIn(true)
                         retrieveLoggedInStatus(true)
-                        localStorage.setItem("username", username);
+                        localStorage.setItem("username", username)
+						
                         
                     }
                     else {
@@ -88,31 +90,32 @@ function Login(props) {
         setLoggedInStatus(false);
         setIsLoggedIn(false);
         setUser({})
+		setConfirmDeletion(false)
         history.push('/')
     }
+
+	function handleDestroyCurrentUser() {
+		setUser({});
+		setLoggedInStatus(false);
+		setIsLoggedIn(false);
+		setConfirmDeletion(false);
+		fetch(`/users/${localStorage.getItem("user_id_current")}`, {
+			method: 'DELETE',
+		})
+		.then((resp) => resp.json())
+		.then(history.push("/confirm_profile_deletion"))
+		localStorage.removeItem("username");
+        localStorage.removeItem("user_id_current");
+        localStorage.removeItem("isLoggedIn");
+		setOpen(false);
+	}
     
 
-    // function handleLogInTemp() {
-    //     localStorage.setItem("username", username);
-    //     localStorage.setItem("user_id", 1);
-    //     localStorage.setItem("isLoggedIn", true);
-    //     retrieveLoggedInStatus(true);
-    //     setIsLoggedIn(true);
 
-    // }
 
-    	// function handlePost() {
-	// 	fetch("http://localhost:9292/users", {
-	// 		method: "POST",
-	// 		headers: {
-	// 			"Content-Type": "application/json",
-	// 		},
-	// 		body: JSON.stringify(newUser),
-	// 	})
-	// 		.then((resp) => resp.json())
-	// 		.then(console.log("Added this fuckin user"));
-	// 	renderPage();
-	// }
+	function confirmDeletionButtonMenu() {
+		setConfirmDeletion(!confirmDeletion);
+	}
 
 
 
@@ -180,12 +183,17 @@ function Login(props) {
 					{isLoggedIn ? (
 						<Button onClick={handleLogOut}> Log Out </Button>
 					) : null}
-					{/* {isLoggedIn ? (
-						<Button onClick={setConfirmDeletion(!confirmDeletion)}> Delete User Profile </Button>
+					<br />
+					<br />
+					{isLoggedIn && !confirmDeletion ? (
+						<Button color="red" onClick={() => confirmDeletionButtonMenu()}> Delete User Profile </Button>
 					): null}
-					{isLoggedIn && confirmDeletion ? (
-						<Button onClick={setConfirmDeletion(!confirmDeletion)}> Are your sure youd like to delete this user?</Button>
-					): null} */}
+					{confirmDeletion ? (
+						<div class="confirm-user-deletion-buttons-div">
+							<Button color="red" onClick={() => handleDestroyCurrentUser()}> Are your sure youd like to delete this user?</Button>
+							<Button color="blue" onClick={() => confirmDeletionButtonMenu()}> Go Back </Button>
+						</div>
+					): null}
 				</Modal.Description>
 			</Modal.Content>
 			<Modal.Actions>

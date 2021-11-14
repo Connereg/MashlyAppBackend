@@ -11,6 +11,7 @@ function ProfileDeletion(props) {
          <h1> Your User Profile has been successfully deleted, as well as your generated mashups.
              <br /> Please sign up again if you wish to create more mashups!
          </h1>
+            <br/>
             <Link to="/">
                 <Button>Return to home screen</Button>
             </Link>

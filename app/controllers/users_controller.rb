@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    skip_before_action :authorize, only: [:create, :index, :show]  
+    skip_before_action :authorize, only: [:create, :index, :show, :destroy]  
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
     
     def create
@@ -15,6 +15,12 @@ class UsersController < ApplicationController
     def show
         pagwOwner = User.find(params[:id])
         render json: pagwOwner, status: :ok
+    end
+
+    def destroy
+        user_to_destroy = User.find(params[:id])
+        user_to_destroy.destroy
+        head :no_content
     end
 
     private

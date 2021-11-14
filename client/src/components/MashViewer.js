@@ -5,14 +5,14 @@ import { Button, Segment } from "semantic-ui-react"
 import PlayButton from "./PlayButton";
 
 const PlayerComponent = (props) => {
-    const { simulPlay, supplyLink1, supplyLink2 } = props;
+    const { simulPlay, supplyLink1, supplyLink2, isVisible } = props;
 
     return (
         <Segment attached>
             <div class="video-container">
                 <ReactPlayer playing={simulPlay} muted={true} controls url={supplyLink1} />
             </div>
-            <div class="video-container">
+            <div style={{display: isVisible ? 'block' : 'none'}} class="video-container">
                 <ReactPlayer playing={simulPlay}  controls url={supplyLink2} />
             </div>
         </Segment>
@@ -30,8 +30,7 @@ function MashViewer(props) {
 	const [supplyLink1, setSupplyLink1] = useState("")
 	const [supplyLink2, setSupplyLink2] = useState("")
 
-    // if (contentAvailableToSupply)
-    //     supplyNewUrls()
+    const [showAudioSource, setShowAudioSource] = useState(false)
 	
     function supplyNewUrls() {
         if (cardLink1 && cardLink2) {
@@ -63,12 +62,14 @@ function MashViewer(props) {
                         isPlaying={simulPlay}
                         handleClick={playButtonToggle}
                     />
+                    <Button onClick={() => setShowAudioSource(!showAudioSource)}>Show Audio Source Below</Button>
                 </Button.Group>
             </Form>
             <PlayerComponent 
                 simulPlay={simulPlay}
                 supplyLink1={supplyLink1}
                 supplyLink2={supplyLink2}
+                isVisible={showAudioSource}
             />
 		</Container>
 	);

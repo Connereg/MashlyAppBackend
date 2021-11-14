@@ -13,7 +13,7 @@ function SubmitNewMashup(props) {
     const [youtubeInput1, setYoutubeInput1] = useState("");
     const [youtubeInput2, setYoutubeInput2] = useState("");
 
-    const[newMashupId, setNewMashupId] = useState(0)
+    // const[newMashupId, setNewMashupId] = useState(0)
 
     const [open, setOpen] = React.useState(false)
     
@@ -37,7 +37,6 @@ function SubmitNewMashup(props) {
         })
         .then((resp) => resp.json())
         .then(newMashupData => {
-            setNewMashupId(newMashupData.id)
             console.log("successful post")
         })
 

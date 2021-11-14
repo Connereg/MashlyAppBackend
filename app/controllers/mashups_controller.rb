@@ -11,7 +11,7 @@ class MashupsController < ApplicationController
         new_mashup = @current_user.mashups.new(mashup_params)
         new_mashup.save!
         
-        render json: new_mashup, status: :ok
+        render json: new_mashup, status: :created
     end
 
     def show  

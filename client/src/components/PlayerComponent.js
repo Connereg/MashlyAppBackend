@@ -4,8 +4,7 @@ import styled from 'styled-components'
 import { ReactPlayer } from 'react-player'
 
 const AudioRevealDiv = styled.div`
-visibility: hidden;
-max-width: 1px;
+    display: none;
 `
 
 const PlayerComponent = (props) => {
@@ -13,10 +12,10 @@ const PlayerComponent = (props) => {
 
     return ( 
         <Segment attached>
-            <div class="video-container">
+            <div class="video-container primary">
                 <ReactPlayer playing={simulPlay} muted={true} controls url={supplyLink1} />
             </div>
-            {showAudioSource === true ? 
+            {showAudioSource ? 
                 <div class="video-container">
                     <ReactPlayer playing={simulPlay}  controls url={supplyLink2} />
                 </div>

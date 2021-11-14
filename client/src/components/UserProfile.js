@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react'
 import { useParams } from 'react-router-dom'
-import { Image, Form, Button, Card } from 'semantic-ui-react'
+import { Image, Container, Card } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
 import MashViewer from './MashViewer'
 import SubmissionCard from './SubmissionCard'
 
 function UserProfile(props) {
-	const {user, renderToggle, setRenderToggle, LinkToMashupButton} = props;
+	const {user} = props;
     
     const [owner, setOwner] = useState({})
     const [mySubmissions, setMySubmissions] = useState([])
@@ -53,8 +53,6 @@ function UserProfile(props) {
         .then((submissionData) => 
         setMySubmissions(submissionData))
     }
-   
-    console.log(mySubmissions)
 
     const submissionCards = (mySubmissions ? mySubmissions.map((submit) => (
         <SubmissionCard
@@ -80,14 +78,15 @@ function UserProfile(props) {
 		<div key={props.pageId}>
             <Image circular centered size="medium" src={owner.profile_picture} alt="profile_pic" ></Image>
             <h2>{owner.username}</h2>
-            
+            <h4> Listed: {submissionCards.length} mashups</h4>
             <br/>
-            <Card.Group>
-                {submissionCards}
-            </Card.Group>
+            <Container style={{width: "90%"}}>
+                <Card.Group>
+                    {submissionCards}
+                </Card.Group>
+            </Container>
         </div>
         <br/>
-        <Button onClick={fetchUserSubmissions} > Reset Video </Button>
         <MashViewer cardLink1={cardLink1} cardLink2={cardLink2} setCardLink1={setCardLink1} setCardLink2={setCardLink2}/>
         </>
 	)

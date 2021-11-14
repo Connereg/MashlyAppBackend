@@ -25,7 +25,6 @@ function SubmissionCard(props) {
 
     
 return (
-    <>
         <Card color={colorOption} onClick={handleClickCard}>
             <Card.Content >
                 <Card.Header>{title}</Card.Header>
@@ -37,6 +36,7 @@ return (
                     <br/>
                     <br/>
                     <LinkToMashupButton id={id} />
+                    <br />
                     {user_id === user.id ?
                         <Link to={`/mashup_deletion`}>
                         <Button color="red" onClick={() => handleDestroySubmission()}> Delete Entry </Button>
@@ -44,8 +44,6 @@ return (
                 </Card.Description>
             </Card.Content>
         </Card>
-        
-    </>
     )
 }
 

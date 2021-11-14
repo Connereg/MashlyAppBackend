@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react'
-import { Dropdown, Icon, Menu, Segment } from 'semantic-ui-react'
+import { Dropdown, Menu, Container, Card } from 'semantic-ui-react'
 import UserCard from './UserCard';
 
 function UserSearchPage(props) {
@@ -24,9 +24,7 @@ function UserSearchPage(props) {
     }
 
     const visibleUsers = usersList.filter((user) => 
-    filterSearch === "" || user.username.toLowerCase().includes(filterSearch.toLowerCase))
-
-    // .includes(filterSearch.toLowerCase)
+        filterSearch === "" || user.username.toLowerCase().includes(filterSearch.toLowerCase()))
 
     const userCardsList = (visibleUsers ? visibleUsers.map((user) => (
         <UserCard
@@ -62,10 +60,12 @@ function UserSearchPage(props) {
             </div>
             </Menu.Menu>
         </Menu>
-
-    <Segment attached='bottom'>
-      {userCardsList}
-    </Segment>
+        <br />
+        <Container style={{width: "90%"}}>
+                <Card.Group>
+                    {userCardsList}
+                </Card.Group>
+            </Container>
         </div>
     )
 }
