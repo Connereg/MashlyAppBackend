@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Comment, Header, Container, Form, Button } from 'semantic-ui-react';
+import { Comment, Header, Container, Button } from 'semantic-ui-react';
 import CommentForm from './CommentForm';
 
 function CommentsSection(props) {
@@ -10,7 +10,7 @@ function CommentsSection(props) {
 
     const [submitContent, setSubmitContent] = useState("")
 
-    const allCommentsFormat = commentsArray.map((comment) => (
+    let allCommentsFormat = commentsArray.map((comment) => (
         <Comment>
             <Comment.Avatar src={comment.user.profile_picture} />
             <Comment.Content>
@@ -21,7 +21,8 @@ function CommentsSection(props) {
                 : null }
                 </Comment.Content>
         </Comment>
-    ))
+    )) 
+
 
     function handleSubmitComment(event) {
         event.preventDefault();

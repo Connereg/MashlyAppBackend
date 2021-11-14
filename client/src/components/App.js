@@ -11,6 +11,15 @@ function App() {
   const [loggedInStatus, setLoggedInStatus] = useState(false);
   const [user, setUser] = useState({})
 
+  useEffect(() => {
+    fetch("/me").then((response) => {
+      if (response.ok) {
+        response.json().then((user) => setUser(user));
+      }
+    });
+    setLoggedInStatus(true);
+  }, []);
+
   function retrieveLoggedInStatus(lis) {
     setLoggedInStatus(lis);
     localStorage.setItem("isLoggedIn", true);

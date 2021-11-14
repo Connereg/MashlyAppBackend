@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Button } from 'semantic-ui-react';
-import MashupProfile from './MashupProfile'
 import LinkToMashupButton from './LinkToMashupButton';
 
 function SubmissionCard(props) {

@@ -51,6 +51,7 @@ function NavBar({ retrieveLoggedInStatus, setLoggedInStatus, loggedInStatus, set
 						loggedInStatus={loggedInStatus}
                         setLoggedInStatus={setLoggedInStatus}
                         setUser={setUser}
+						user={user}
 					/>
 				</Menu.Item>
 			</Menu>

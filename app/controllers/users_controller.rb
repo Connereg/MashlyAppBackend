@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-    skip_before_action :authorize, only: [:create, :index, :show, :destroy]  
+    skip_before_action :authorize, only: [:create, :index, :destroy]  
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
     
     def create
@@ -21,6 +21,15 @@ class UsersController < ApplicationController
         user_to_destroy = User.find(params[:id])
         user_to_destroy.destroy
         head :no_content
+    end
+
+    def user_login
+        user = User.find_by(id: session[:user_id])
+        if user
+            render json: user
+        else
+            render json: { error: "Not authorized"}, status: :unauthorized
+        end
     end
 
     private

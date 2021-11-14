@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   #create new user
   post "/signup", to: "users#create"
   #allows user to stay logged in 
-  get "/me", to: "users#show"
+  get "/me", to: "users#user_login"
   #to log the user out 
   delete "/logout", to: "sessions#destroy"
 

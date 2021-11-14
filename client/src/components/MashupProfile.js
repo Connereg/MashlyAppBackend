@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useHistory, useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import MashupProfileViewer from './MashupProfileViewer';
 import CommentsSection from './CommentsSection';
 
@@ -8,13 +8,8 @@ function MashupProfile(props) {
     
     const [mashup, setMashup] = useState()
     const [commentsArray, setCommentsArray] = useState([])
-    const [open, setOpen] = useState(false)
-    
-    const [cardLink1, setCardLink1] = useState("")
-    const [cardLink2, setCardLink2] = useState("")
 
     const id = parseInt(useParams().id);
-    let history = useHistory();
 
     useEffect(() => {
         getMashup();

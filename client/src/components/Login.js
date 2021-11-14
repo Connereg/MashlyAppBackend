@@ -3,7 +3,7 @@ import { Button, Form, Image, Modal } from "semantic-ui-react";
 import { useHistory } from 'react-router-dom'
 
 function Login(props) {
-	const { retrieveLoggedInStatus, loggedInStatus, setLoggedInStatus, setUser } = props;
+	const { retrieveLoggedInStatus, loggedInStatus, setLoggedInStatus, setUser, user } = props;
 
     let history = useHistory();
 
@@ -130,7 +130,7 @@ function Login(props) {
 			onClose={() => setOpen(false)}
 			onOpen={() => setOpen(true)}
 			open={open}
-			trigger={<Button> {isLoggedIn ? "Log Out" : "Log In"} </Button>}
+			trigger={<Button> {loggedInStatus ? "Log Out" : "Log In"} </Button>}
 		>
 			<Modal.Header>Log In/Out</Modal.Header>
 			<Modal.Content image>
@@ -140,7 +140,7 @@ function Login(props) {
 					wrapped
 				/>
 				<Modal.Description>
-					{!isLoggedIn ? (
+					{!loggedInStatus ? (
 						<Form >
 							<Form.Field>
 								<label>User Name</label>
@@ -176,11 +176,11 @@ function Login(props) {
 						</Form>
 					) : null}
 					<h4>
-						{isLoggedIn
-							? `You are now logged in as: ${username}`
+						{loggedInStatus
+							? `You are now logged in as: ${user.username}`
 							: "You are not logged in!"}
 					</h4>
-					{isLoggedIn ? (
+					{loggedInStatus ? (
 						<Button onClick={handleLogOut}> Log Out </Button>
 					) : null}
 					<br />
