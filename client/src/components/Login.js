@@ -15,7 +15,7 @@ function Login(props) {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [confirmDeletion, setConfirmDeletion] = useState(false)
     const [errorsAll, setErrorsAll] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    
 
 
 	function handleLogInAttempt(e) {
@@ -29,7 +29,6 @@ function Login(props) {
             },
             body: JSON.stringify({ username, password }),
         }).then((r) => {
-                setIsLoading(false);
                 if (r.ok) {
                     console.log(r.headers.get('Set-Cookie'))
                     r.json().then((user) => {
@@ -62,7 +61,6 @@ function Login(props) {
                 },
                 body: JSON.stringify({ username, password, profile_picture }),
             }).then((r) => {
-                    setIsLoading(false);
                     if (r.ok) {
                         console.log(r.headers.get('Set-Cookie'))
                         r.json().then((user) => {
@@ -87,6 +85,7 @@ function Login(props) {
         localStorage.removeItem("username");
         localStorage.removeItem("user_id_current");
         localStorage.removeItem("isLoggedIn");
+		destroySession();
         setLoggedInStatus(false);
         setIsLoggedIn(false);
         setUser({})
@@ -110,19 +109,18 @@ function Login(props) {
 		setOpen(false);
 	}
     
+	function destroySession() {
+		fetch("/logout", {
+			method: "DELETE",
+		})
+	}
+	
 
 
 
 	function confirmDeletionButtonMenu() {
 		setConfirmDeletion(!confirmDeletion);
 	}
-
-
-
-	const newUser = {
-		username: username,
-		password: password,
-	};
 
 
 	return (

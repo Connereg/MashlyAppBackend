@@ -75,10 +75,12 @@ function UserProfile(props) {
 
 	return (
         <>
+        <br/>
 		<div key={props.pageId}>
             <Image circular centered size="medium" src={owner.profile_picture} alt="profile_pic" ></Image>
             <h2>{owner.username}</h2>
             <h4> Listed: {submissionCards.length} mashups</h4>
+            <h4> Click a card to supply its urls to the preview player below, then click the supply links button to prepare the player!</h4>
             <br/>
             <Container style={{width: "90%"}}>
                 <Card.Group>
@@ -87,6 +89,7 @@ function UserProfile(props) {
             </Container>
         </div>
         <br/>
+        <h2> Preview Mashup Player</h2>
         <MashViewer cardLink1={cardLink1} cardLink2={cardLink2} setCardLink1={setCardLink1} setCardLink2={setCardLink2}/>
         </>
 	)

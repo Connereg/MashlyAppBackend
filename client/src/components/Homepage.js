@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 // import ReactPlayer from 'react-player';
 // import { Button, Form, Container } from "semantic-ui-react";
 import MashViewer from "./MashViewer";
@@ -6,10 +6,6 @@ import MashViewer from "./MashViewer";
 
 
 function Homepage(props) {
-
-	
-
-	
 
 
 	return (
@@ -21,8 +17,6 @@ function Homepage(props) {
 			<br/> Cick the Start/Stop Simulplay button to run a preview of your video mashup!</p>
 			<MashViewer />
 		</div>
-		
-		
 	);
 }
 export default Homepage;
